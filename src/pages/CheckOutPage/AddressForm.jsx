@@ -60,7 +60,7 @@ const AddressForm = ({ onNextClick }) => {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="firstName"
+            id="first"
             name="firstName"
             label="First name"
             fullWidth
@@ -76,7 +76,7 @@ const AddressForm = ({ onNextClick }) => {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="lastName"
+            id="last"
             name="lastName"
             label="Last name"
             fullWidth
@@ -92,7 +92,7 @@ const AddressForm = ({ onNextClick }) => {
         <Grid item xs={12}>
           <TextField
             required
-            id="address1"
+            id="street"
             name="address1"
             label="Address line 1"
             fullWidth
