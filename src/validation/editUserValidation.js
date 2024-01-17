@@ -8,12 +8,12 @@ const editUserSchema = Joi.object({
   phone: Joi.string().required().min(9).max(11),
   url: Joi.string().min(14).allow(""),
   alt: Joi.string().min(2).max(256).allow(""),
-  state: Joi.string().min(2).max(256).allow(""),
+
   country: Joi.string().min(2).max(256).required(),
   city: Joi.string().min(2).max(256).required(),
   street: Joi.string().min(2).max(256).required(),
   houseNumber: Joi.number().min(2).max(256).required(),
-  zip: Joi.number().min(2).allow(""),
+  // zip: Joi.number().min(2).allow(""),
 });
 
 const validateEditUser = (inputToCheck) =>

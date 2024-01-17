@@ -1,4 +1,4 @@
-const normalizeData = (inputsValue, isBusiness) => {
+const normalizeData = (inputsValue, isBusiness, selectedFile) => {
   return {
     name: {
       first: inputsValue.first,
@@ -9,16 +9,15 @@ const normalizeData = (inputsValue, isBusiness) => {
     email: inputsValue.email,
     password: inputsValue.password,
     image: {
-      url: inputsValue.url,
+      image: selectedFile,
       alt: inputsValue.alt,
     },
     address: {
-      state: inputsValue.state,
       country: inputsValue.country,
       city: inputsValue.city,
       street: inputsValue.street,
       houseNumber: inputsValue.houseNumber,
-      zip: +inputsValue.zip,
+      // zip: +inputsValue.zip,
     },
     isBusiness: isBusiness,
   };

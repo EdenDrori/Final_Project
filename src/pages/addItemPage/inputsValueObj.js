@@ -9,7 +9,7 @@ const inputsValueObj = () => {
     currency: "",
     url: "",
     alt: "",
-    state: "",
+    
     country: "",
     city: "",
     street: "",

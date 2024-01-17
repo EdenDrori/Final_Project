@@ -125,9 +125,7 @@ const ProfilePage = () => {
           <ListItem sx={{ display: { xs: "none", md: "block" } }}>
             <ListItemText primary="Alt" secondary={inputsValue.alt} />
           </ListItem> */}
-          <ListItem>
-            <ListItemText primary="State" secondary={inputsValue.state} />
-          </ListItem>
+          
           <ListItem>
             <ListItemText primary="Country" secondary={inputsValue.country} />
           </ListItem>
@@ -143,9 +141,7 @@ const ProfilePage = () => {
               secondary={inputsValue.houseNumber}
             />
           </ListItem>
-          <ListItem>
-            <ListItemText primary="Zip" secondary={inputsValue.zip} />
-          </ListItem>
+          
         </List>
         <Button
           variant="outlined"

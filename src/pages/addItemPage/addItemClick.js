@@ -7,8 +7,9 @@ import ROUTES from "../../routes/ROUTES";
 const addItemClick = async (inputsValue, setErrorsState, navigate) => {
   try {
     const joiResponse = validateItem(inputsValue);
+     console.log(joiResponse);
     setErrorsState(joiResponse);
-    console.log(joiResponse);
+   
     if (joiResponse) return;
     const request = normalizeDataItem(inputsValue);
     const { data } = await axios.post("/items", request);

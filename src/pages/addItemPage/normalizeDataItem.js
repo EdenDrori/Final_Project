@@ -14,7 +14,7 @@ const normalizeDataItem = (inputsValue) => {
       alt: inputsValue.alt,
     },
     address: {
-      state: inputsValue.state,
+     
       country: inputsValue.country,
       city: inputsValue.city,
       street: inputsValue.street,

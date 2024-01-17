@@ -17,6 +17,7 @@ const ItemsPage = () => {
   const [initialFilteredData, setInitialFilteredData] = useState([]);
   const [refreshState, setRefreshState] = useState("");
   const navigate = useNavigate();
+  
   const userData = useSelector((bigPie) => bigPie.authSlice.userData);
   const query = useQueryParams();
   useEffect(() => {
@@ -148,6 +149,8 @@ const ItemsPage = () => {
       initialDataFromServer.filter((item) => item.title.startsWith(filter))
     );
   };
+
+ 
   // const handleDressesFilter = () => {
   //   console.log(initialDataFromServer);
   //   if (!initialDataFromServer.length) return;
@@ -176,6 +179,7 @@ const ItemsPage = () => {
                   brand={item.brand}
                   price={`${item.price.value}  ${item.price.currency}`}
                   size={item.size}
+                  status={item.status}
                   phone={item.phone}
                   address={`${item.address.city}, ${item.address.street} ${item.address.houseNumber}`}
                   img={item.image.url}
@@ -185,8 +189,8 @@ const ItemsPage = () => {
                   bizNumber={item.bizNumber}
                   like={item.likes}
                   itemNumber={item.itemNumber}
-                  onDeleteItem={handleDeleteItem}
-                  onEditItem={handleEditItem}
+                  //onDeleteItem={handleDeleteItem}
+                  //onEditItem={handleEditItem}
                   onLikeItem={handleLikeItem}
                   onLikeSuccess={handleLikeSuccess}
                   onViewItem={handleViewItem}
@@ -268,6 +272,11 @@ const ItemsPage = () => {
       >
         Back to all items
       </Button>
+      {/* <div className="App">
+        <h2>Add Image:</h2>
+        <input type="file" onChange={handleChange} />
+        <img src={file} />
+      </div> */}
     </Container>
   );
 };

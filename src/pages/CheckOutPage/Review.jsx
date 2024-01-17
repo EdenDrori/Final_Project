@@ -17,9 +17,10 @@ const payments = [
   { name: "Expiry date", detail: "04/2024" },
 ];
 
-const Review = () => {
+const Review = ({address}) => {
   const { _id } = useParams();
-  console.log(_id);
+  //console.log(_id);
+  //console.log("address",address);
   const [itemDetails, setItemDetails] = useState({
     title: "",
     description: "",

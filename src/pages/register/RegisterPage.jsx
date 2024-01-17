@@ -9,16 +9,26 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { Alert } from "@mui/material";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
+import {
+  Alert,
+  InputAdornment,
+  OutlinedInput,
+  InputLabel,
+  FormControl,
+  IconButton,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
 import { inputsValueObj } from "./inputsValueObj";
 import { submit } from "./submit";
+
 const RegisterPage = () => {
   const navigate = useNavigate();
   const [errorsState, setErrorsState] = useState(null);
   const [inputsValue, setInputsValue] = useState(inputsValueObj);
   const [thisChecked, setChecked] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
   const handleCheckChange = (e) => {
     setChecked(e.target.checked);
   };
@@ -28,9 +38,16 @@ const RegisterPage = () => {
       [e.target.id]: e.target.value,
     }));
   };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    console.log(file);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    submit(navigate, inputsValue, setErrorsState, thisChecked);
+    submit(navigate, inputsValue, selectedFile, setErrorsState, thisChecked);
   };
 
   return (
@@ -210,7 +227,7 @@ const RegisterPage = () => {
             )}
           </Grid>
           <Grid item xs={12}>
-            <TextField
+            {/* <TextField
               fullWidth
               name="url"
               label="Url"
@@ -232,7 +249,24 @@ const RegisterPage = () => {
             />
             {errorsState && errorsState.url && (
               <Alert severity="warning">{errorsState.url}</Alert>
-            )}
+            )} */}
+            <FormControl variant="outlined" fullWidth sx={{ mt: 2 }}>
+              <OutlinedInput
+                id="image-upload"
+                type="file"
+                onChange={handleImageUpload}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <label htmlFor="image-upload">
+                      <IconButton component="span">
+                        <AttachFileIcon />
+                      </IconButton>
+                    </label>
+                  </InputAdornment>
+                }
+                label="Image"
+              />
+            </FormControl>
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -388,31 +422,7 @@ const RegisterPage = () => {
               <Alert severity="warning">{errorsState.houseNumber}</Alert>
             )}
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              name="zip"
-              label="Zip"
-              id="zip"
-              autoComplete="new-zip"
-              value={inputsValue.zip}
-              onChange={handleInputsChange}
-              sx={{
-                "& fieldset": {
-                  borderColor: "inputs.default",
-                },
-                "&:hover fieldset": {
-                  borderColor: "primary.dark",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "primary.dark",
-                },
-              }}
-            />
-            {errorsState && errorsState.zip && (
-              <Alert severity="warning">{errorsState.zip}</Alert>
-            )}
-          </Grid>
+
           <Grid item xs={12}>
             <FormControlLabel
               control={

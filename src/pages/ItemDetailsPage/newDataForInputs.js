@@ -9,7 +9,7 @@ const newDataForInputs = (data) => {
     size: data.size,
     url: data.image.url,
     alt: data.image.alt,
-    state: data.address.state,
+   
     country: data.address.country,
     city: data.address.city,
     street: data.address.street,

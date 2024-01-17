@@ -7,6 +7,10 @@ import {
   Divider,
   Button,
   Alert,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
@@ -19,6 +23,8 @@ const EditItem = () => {
   const [errorsState, setErrorsState] = useState(null);
   const navigate = useNavigate();
   const [inputsValue, setInputValue] = useState(inputsValueObj());
+  const [status, setStatus] = useState("available");
+
   const { _id } = useParams();
   useEffect(() => {
     axios
@@ -28,7 +34,12 @@ const EditItem = () => {
       })
       .catch((err) => {});
   }, []);
-
+  const handleChange = (event) => {
+   
+    setStatus(event.target.value);
+     
+    
+  };
   const handleInputChange = (e) => {
     setInputValue((currentState) => ({
       ...currentState,
@@ -36,7 +47,7 @@ const EditItem = () => {
     }));
   };
   const handleUpdateChangesClick = () => {
-    updateChangesClick(inputsValue, setErrorsState, navigate, _id);
+    updateChangesClick(inputsValue,status, setErrorsState, navigate, _id);
   };
   return (
     <Container sx={{ padding: "50px", paddingBottom: "60px" }}>
@@ -97,12 +108,13 @@ const EditItem = () => {
           <Alert severity="warning">{errorsState.description}</Alert>
         )}
         <TextField
-          id="price"
+          id="value"
           label="price"
           variant="outlined"
           sx={{ mt: "10px" }}
           onChange={handleInputChange}
           value={inputsValue.value}
+          required
         />
         {errorsState && errorsState.value && (
           <Alert severity="warning">{errorsState.value}</Alert>
@@ -114,6 +126,7 @@ const EditItem = () => {
           sx={{ mt: "10px" }}
           onChange={handleInputChange}
           value={inputsValue.currency}
+          required
         />
         {errorsState && errorsState.currency && (
           <Alert severity="warning">{errorsState.currency}</Alert>
@@ -125,23 +138,21 @@ const EditItem = () => {
           sx={{ mt: "10px" }}
           onChange={handleInputChange}
           value={inputsValue.size}
-          
         />
         {errorsState && errorsState.size && (
           <Alert severity="warning">{errorsState.size}</Alert>
         )}
-        <TextField
+        {/* <TextField
           id="status"
           label="status"
           variant="outlined"
           sx={{ mt: "10px" }}
           onChange={handleInputChange}
           value={inputsValue.status}
-          required
         />
         {errorsState && errorsState.status && (
           <Alert severity="warning">{errorsState.status}</Alert>
-        )}
+        )} */}
 
         <TextField
           id="url"
@@ -165,17 +176,7 @@ const EditItem = () => {
         {errorsState && errorsState.alt && (
           <Alert severity="warning">{errorsState.alt}</Alert>
         )}
-        <TextField
-          id="state"
-          label="State"
-          variant="outlined"
-          sx={{ mt: "10px" }}
-          onChange={handleInputChange}
-          value={inputsValue.state}
-        />
-        {errorsState && errorsState.state && (
-          <Alert severity="warning">{errorsState.state}</Alert>
-        )}
+
         <TextField
           id="country"
           label="Country"
@@ -224,17 +225,19 @@ const EditItem = () => {
         {errorsState && errorsState.houseNumber && (
           <Alert severity="warning">{errorsState.houseNumber}</Alert>
         )}
-        {/* <TextField
-          id="zip"
-          label="Zip"
-          variant="outlined"
-          sx={{ mt: "10px" }}
-          onChange={handleInputChange}
-          value={inputsValue.zip}
-        />
-        {errorsState && errorsState.zip && (
-          <Alert severity="warning">{errorsState.zip}</Alert>
-        )} */}
+        <FormControl fullWidth sx={{ mt: "10px" }}>
+          <InputLabel id="demo-simple-select-label">Status</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="status"
+            value={status}
+            label="Status"
+            onChange={handleChange}
+          >
+            <MenuItem value={"sold"}>Sold</MenuItem>
+            <MenuItem value={"available"}>Available</MenuItem>
+          </Select>
+        </FormControl>
       </Grid>
       <Grid container spacing={2}>
         <Grid item lg={8} md={8} sm={8} xs>
@@ -247,7 +250,7 @@ const EditItem = () => {
           </Button>
         </Grid>
         <Grid item xs>
-          <Link to={ROUTES.HOME}>
+          <Link to={ROUTES.MYITEM}>
             <Button
               variant="outlined"
               sx={{
@@ -255,7 +258,7 @@ const EditItem = () => {
                 width: "100%",
                 ml: "0%",
               }}
-              onClick={<Link to={ROUTES.HOME}></Link>}
+              onClick={<Link to={ROUTES.MYITEM}></Link>}
             >
               Discard Changes
             </Button>

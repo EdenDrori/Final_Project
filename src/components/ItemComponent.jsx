@@ -10,6 +10,8 @@ import {
   IconButton,
   Typography,
   Grid,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 import PhoneIcon from "@mui/icons-material/Phone";
 import CreateIcon from "@mui/icons-material/Create";
@@ -51,12 +53,15 @@ const ItemComponent = ({
 }) => {
   const [expanded, setExpanded] = useState(false);
   const [thisOP, setOP] = useState("1");
+  //const [statusVal, setStatusVal] = useState("");
   const theme = useTheme();
   const handlePhoneClick = () => {
     toast.info(`Phone Num:${phone}. `, {
       position: toast.POSITION.BOTTOM_CENTER,
     });
   };
+  const statusVal = status;
+  //setStatusVal(status);
   const handleDeleteItemClick = () => {
     onDeleteItem(_id);
   };
@@ -85,6 +90,29 @@ const ItemComponent = ({
       setOP("0.6");
     }
   };
+  // const handleCheckChange = async (_id) => {
+  //   try {
+  //     const { data } = await axios.patch("/items/status/" + _id);
+  //     console.log(_id);
+  //     setThisChecked(!thisChecked);
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast("There's a problem at changing status for this user from server", {
+  //       position: "top-center",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "light",
+  //     });
+  //   }
+  // };
+  // const handleCheckChangeClick = () => {
+  //   handleCheckChange(_id);
+
+  // };
   return (
     <Card
       sx={{
@@ -100,8 +128,8 @@ const ItemComponent = ({
           alt={alt}
           sx={{
             height: "30vh",
-            objectFit: "cover", 
-            height:"100%",
+            objectFit: "cover",
+            height: "100%",
             width: "100%", // Ensure the image takes the full width of the container
           }}
         />
@@ -115,13 +143,18 @@ const ItemComponent = ({
               sx={{ p: 0, mb: 1, textTransform: "capitalize" }}
             />
           </Grid>
-          <Grid item>
+          <Grid
+            item
+            sx={{ display: statusVal === "available" ? "none" : "block" }}
+          >
             <Typography variant="body2">{status}</Typography>
+          </Grid>
+          <Grid item>
             <Typography variant="body2">{price}</Typography>
           </Grid>
         </Grid>
         <Divider />
-         {/* <Box sx={{ mt: 1 }}>
+        {/* <Box sx={{ mt: 1 }}>
           <Typography variant="body2">
             <Typography fontWeight="700" variant="subtitle1" component="span">
               Phone:{" "}
@@ -135,76 +168,73 @@ const ItemComponent = ({
             {address}
           </Typography>
         </Box>  */}
-         <Divider />
-        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph sx={{ fontWeight: "bold" }}>
-              Item Number: <br />
-              <span style={{ fontWeight: "300" }}>{itemNumber} </span>
-            </Typography>
-            <Typography paragraph sx={{ fontWeight: "bold" }}>
-              description: <br />
-              <span style={{ fontWeight: "300" }}>{description} </span>
-            </Typography>
-            <Typography paragraph sx={{ fontWeight: "bold" }}>
-              Card Date Created: <br />
-              <span style={{ fontWeight: "300" }}>{date}</span>
-            </Typography>
-          </CardContent>
-        </Collapse> */}
-        <Box display="flex" justifyContent="space-between"> 
-        <Box>
-          <IconButton
-            sx={{
-              padding: { xs: "4px", md: "8px" },
-              paddingTop: { xs: "12px" },
-              marginTop: { md: "10px" },
-            }}
-            onClick={handlePhoneClick}
-          >
-            <PhoneIcon />
-          </IconButton>
-          <IconsGuard>
+        <Divider />
+
+        <Box display="flex" justifyContent="space-between">
+          <Box>
             <IconButton
               sx={{
                 padding: { xs: "4px", md: "8px" },
                 paddingTop: { xs: "12px" },
                 marginTop: { md: "10px" },
               }}
-              onClick={handleClickEditItem}
+              onClick={handlePhoneClick}
             >
-              <CreateIcon />
+              <PhoneIcon />
             </IconButton>
-          </IconsGuard>
+            <IconsGuard>
+              <IconButton
+                sx={{
+                  padding: { xs: "4px", md: "8px" },
+                  paddingTop: { xs: "12px" },
+                  marginTop: { md: "10px" },
+                }}
+                onClick={handleClickEditItem}
+              >
+                <CreateIcon />
+              </IconButton>
+            </IconsGuard>
+          </Box>
+
+          <Box>
+            <IconsGuard>
+              <IconButton
+                sx={{
+                  padding: { xs: "4px", md: "8px" },
+                  paddingTop: { xs: "12px" },
+                  marginTop: { md: "10px" },
+                }}
+                onClick={handleDeleteItemClick}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </IconsGuard>
+            <LoggedOutGuard>
+              <IconButton
+                sx={{
+                  padding: { xs: "4px", md: "8px" },
+                  paddingTop: { xs: "12px" },
+                  marginTop: { md: "10px" },
+                }}
+                onClick={handleLikeItem}
+              >
+                <FavoriteIcon color={like ? "error" : ""} />
+              </IconButton>
+            </LoggedOutGuard>
+            {/* <Divider />
+            <FormControlLabel
+              sx={{ marginTop: "20px" }}
+              control={
+                <Checkbox
+                  checked={status}
+                  onChange={handleCheckChangeClick}
+                  color="primary"
+                />
+              }
+              label="Mark if sold"
+            /> */}
+          </Box>
         </Box>
-      
-        <Box>
-          <IconsGuard>
-            <IconButton
-              sx={{
-                padding: { xs: "4px", md: "8px" },
-                paddingTop: { xs: "12px" },
-                marginTop: { md: "10px" },
-              }}
-              onClick={handleDeleteItemClick}
-            >
-              <DeleteIcon />
-            </IconButton>
-          </IconsGuard>
-          <LoggedOutGuard>
-            <IconButton
-              sx={{
-                padding: { xs: "4px", md: "8px" },
-                paddingTop: { xs: "12px" },
-                marginTop: { md: "10px" },
-              }}
-              onClick={handleLikeItem}
-            >
-              <FavoriteIcon color={like ? "error" : ""} />
-            </IconButton>
-          </LoggedOutGuard>
-        </Box>
-        </Box> 
       </CardContent>
     </Card>
   );

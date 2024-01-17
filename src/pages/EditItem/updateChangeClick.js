@@ -5,6 +5,7 @@ import axios from "axios";
 
 const updateChangesClick = async (
   inputsValue,
+  status,
   setErrorsState,
   navigate,
   _id
@@ -19,6 +20,7 @@ const updateChangesClick = async (
       description: inputsValue.description,
       phone: inputsValue.phone,
       size: inputsValue.size,
+      status: status,
       image: {
         url: inputsValue.url,
         alt: inputsValue.alt,
@@ -28,7 +30,6 @@ const updateChangesClick = async (
         currency: inputsValue.currency,
       },
       address: {
-        state: inputsValue.state,
         country: inputsValue.country,
         city: inputsValue.city,
         street: inputsValue.street,
@@ -36,7 +37,7 @@ const updateChangesClick = async (
         //zip: +inputsValue.zip,
       },
     });
-    
+    console.log(data);
     toast("Your item has been edit succssefully", {
       position: "top-center",
       autoClose: 5000,
@@ -47,7 +48,7 @@ const updateChangesClick = async (
       progress: undefined,
       theme: "light",
     });
-    navigate(ROUTES.HOME);
+    navigate(ROUTES.MYITEM);
   } catch (err) {
     toast("Somthing is missing... try again", {
       position: "top-center",

@@ -6,16 +6,23 @@ import {
   Typography,
   Divider,
   Button,
+  Input,
+  InputAdornment,
   Alert,
+  OutlinedInput,
+  InputLabel,
+  FormControl,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
 import { addItemClick } from "./addItemClick";
 import { inputsValueObj } from "./inputsValueObj";
+
 const AddItem = () => {
   const [errorsState, setErrorsState] = useState(null);
   const navigate = useNavigate();
   const [inputsValue, setInputValue] = useState(inputsValueObj());
+  const [file, setFile] = useState();
 
   const handleInputChange = (e) => {
     setInputValue((currentState) => ({
@@ -25,7 +32,12 @@ const AddItem = () => {
   };
   const handleAddItemClick = () => {
     addItemClick(inputsValue, setErrorsState, navigate);
-    console.log(inputsValue);
+    //console.log(inputsValue);
+  };
+  const handleUploadImage = (e) => {
+    console.log(e.target.files);
+    //console.log(file, "file");
+    setFile(URL.createObjectURL(e.target.files[0]));
   };
   return (
     <Container sx={{ paddingBottom: "60px" }}>
@@ -102,6 +114,7 @@ const AddItem = () => {
           sx={{ mt: "10px" }}
           onChange={handleInputChange}
           value={inputsValue.value}
+          required
         />
         {errorsState && errorsState.value && (
           <Alert severity="warning">{errorsState.value}</Alert>
@@ -113,6 +126,7 @@ const AddItem = () => {
           sx={{ mt: "10px" }}
           onChange={handleInputChange}
           value={inputsValue.currency}
+          required
         />
         {errorsState && errorsState.currency && (
           <Alert severity="warning">{errorsState.currency}</Alert>
@@ -140,7 +154,7 @@ const AddItem = () => {
         {errorsState && errorsState.status && (
           <Alert severity="warning">{errorsState.status}</Alert>
         )} */}
-        <TextField
+        {/* <TextField
           id="url"
           label="Url"
           variant="outlined"
@@ -150,7 +164,21 @@ const AddItem = () => {
         />
         {errorsState && errorsState.url && (
           <Alert severity="warning">{errorsState.url}</Alert>
-        )}
+        )} */}
+        <FormControl variant="outlined" fullWidth sx={{ mt: 2 }}>
+          <InputLabel htmlFor="image-upload">Image</InputLabel>
+          <OutlinedInput
+            id="image-upload"
+            type="file"
+            onChange={handleUploadImage}
+            endAdornment={
+              <InputAdornment position="end">
+                {/* Optionally, you can add an icon or button here */}
+              </InputAdornment>
+            }
+            label="Image"
+          />
+        </FormControl>
         <TextField
           id="alt"
           label="Alt"
@@ -162,17 +190,7 @@ const AddItem = () => {
         {errorsState && errorsState.alt && (
           <Alert severity="warning">{errorsState.alt}</Alert>
         )}
-        <TextField
-          id="state"
-          label="State"
-          variant="outlined"
-          sx={{ mt: "10px" }}
-          onChange={handleInputChange}
-          value={inputsValue.state}
-        />
-        {errorsState && errorsState.state && (
-          <Alert severity="warning">{errorsState.state}</Alert>
-        )}
+
         <TextField
           id="country"
           label="Country"

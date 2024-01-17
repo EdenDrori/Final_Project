@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Fragment } from "react";
+import { useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,34 +16,43 @@ import Typography from "@mui/material/Typography";
 import AddressForm from "./AddressForm";
 import Payment from "./Payment";
 import Review from "./Review";
-import { validateAddress } from "./validateAddress";
+import { validateAddress } from "../../validation/validateAddress";
+import { inputsValueObjCheckout } from "./inputsValueObjCheckout";
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
-const getStepContent = (step) => {
-  switch (step) {
-    case 0:
-      return <AddressForm  />;
-    case 1:
-      return <Payment />;
-    case 2:
-      return <Review  />;
-    default:
-      throw new Error("Unknown step");
-  }
-};
-
 const Checkout = () => {
   const [activeStep, setActiveStep] = React.useState(0);
- // const [addressInfo, setAddressInfo] = React.useState({});
+  // const [address, setAddress] = React.useState(inputsValueObjCheckout);
+  const addressRef = React.useRef();
+
+  // useEffect(() => {
+  //   console.log(addressRef);
+  // }, [addressRef]);
+  const getStepContent = (step) => {
+    switch (step) {
+      case 0:
+        return <AddressForm refferns={addressRef} />;
+
+      case 1:
+        return <Payment />;
+      case 2:
+        return <Review />;
+      default:
+        throw new Error("Unknown step");
+    }
+  };
+
+  // const [addressInfo, setAddressInfo] = React.useState({});
 
   const handleNext = () => {
     if (activeStep === 0) {
       // const joiResponse = validateAddress(addressInfo);
       // console.log(joiResponse);
       // if (joiResponse) return;
-      console.log("activeStep", activeStep);
+      console.log("Address Form Data:", addressRef.current);
     }
+
     setActiveStep(activeStep + 1);
   };
 

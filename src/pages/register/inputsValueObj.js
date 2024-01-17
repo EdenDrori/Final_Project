@@ -8,12 +8,12 @@ const inputsValueObj = () => {
     password: "",
     url: "",
     alt: "",
-    state: "",
+    
     country: "",
     city: "",
     street: "",
     houseNumber: "",
-    zip: "",
+   
   };
   return inputs;
 };

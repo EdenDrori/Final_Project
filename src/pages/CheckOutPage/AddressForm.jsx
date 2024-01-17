@@ -13,12 +13,12 @@ import axios from "axios";
 import normalizeDataFromServer from "../profilePage/normalizeDataFromServer";
 import { checkoutNormalize } from "./checkoutNormalize";
 import { inputsValueObjCheckout } from "./inputsValueObjCheckout";
-import { validateAddress } from "./validateAddress";
+import { validateAddress } from "../../validation/validateAddress";
 
-const AddressForm = ({ onNextClick }) => {
-  //const navigate = useNavigate();
+const AddressForm = ({ refferns }) => {
   const [errorsState, setErrorsState] = useState(null);
   const [inputsValue, setInputsValue] = useState(inputsValueObjCheckout);
+  refferns = inputsValue;
   useEffect(() => {
     let token = getToken();
     let idFromToken = jwtDecode(token)._id;
@@ -37,20 +37,32 @@ const AddressForm = ({ onNextClick }) => {
         });
       });
   }, []);
+
   const handleInputsChange = (e) => {
-    setInputsValue((currentState) => ({
-      ...currentState,
-      [e.target.id]: e.target.value,
-    }));
+    setInputsValue((currentState) => {
+      const newState = {
+        ...currentState,
+        [e.target.id]: e.target.value,
+      };
+      return newState;
+      // Set the current value of the ref to the updated state
+      // refferns.current = newState;
+      // console.log(newState);
+      // return newState;
+    });
   };
-//   const handleNextButton = () => {
-//     const joiResponse = validateAddress(inputsValue);
-//     setErrorsState(joiResponse);
-//     if (!joiResponse) {
-//       // Call the callback function to update the state in the Checkout component
-//       onNextClick(inputsValue);
-//     }
-//   };
+  useEffect(() => {
+    // Update refferns.current whenever inputsValue changes
+    refferns.current = inputsValue;
+  }, [inputsValue, refferns]);
+  //   const handleNextButton = () => {
+  //     const joiResponse = validateAddress(address);
+  //     setErrorsState(joiResponse);
+  //     if (!joiResponse) {
+  //       // Call the callback function to update the state in the Checkout component
+  //       onNextClick(address);
+  //     }
+  //   };
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -69,10 +81,10 @@ const AddressForm = ({ onNextClick }) => {
             value={inputsValue.first}
             onChange={handleInputsChange}
           />
-          {errorsState && errorsState.first && (
-            <Alert severity="warning">{errorsState.first}</Alert>
-          )}
         </Grid>
+        {errorsState && errorsState.first && (
+          <Alert severity="warning">{errorsState.first}</Alert>
+        )}
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -85,10 +97,10 @@ const AddressForm = ({ onNextClick }) => {
             value={inputsValue.last}
             onChange={handleInputsChange}
           />
-          {errorsState && errorsState.last && (
-            <Alert severity="warning">{errorsState.last}</Alert>
-          )}
         </Grid>
+        {errorsState && errorsState.last && (
+          <Alert severity="warning">{errorsState.last}</Alert>
+        )}
         <Grid item xs={12}>
           <TextField
             required
@@ -101,10 +113,10 @@ const AddressForm = ({ onNextClick }) => {
             value={inputsValue.street}
             onChange={handleInputsChange}
           />
-          {errorsState && errorsState.street && (
-            <Alert severity="warning">{errorsState.street}</Alert>
-          )}
         </Grid>
+        {errorsState && errorsState.street && (
+          <Alert severity="warning">{errorsState.street}</Alert>
+        )}
         {/* <Grid item xs={12}>
           <TextField
             id="address2"
@@ -127,25 +139,11 @@ const AddressForm = ({ onNextClick }) => {
             value={inputsValue.city}
             onChange={handleInputsChange}
           />
-          {errorsState && errorsState.city && (
-            <Alert severity="warning">{errorsState.city}</Alert>
-          )}
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="state"
-            name="state"
-            label="State/Province/Region"
-            fullWidth
-            variant="standard"
-            value={inputsValue.state}
-            onChange={handleInputsChange}
-          />
-          {errorsState && errorsState.state && (
-            <Alert severity="warning">{errorsState.state}</Alert>
-          )}
-        </Grid>
-        <Grid item xs={12} sm={6}>
+        {errorsState && errorsState.city && (
+          <Alert severity="warning">{errorsState.city}</Alert>
+        )}
+        {/* <Grid item xs={12} sm={6}>
           <TextField
             required
             id="zip"
@@ -157,10 +155,10 @@ const AddressForm = ({ onNextClick }) => {
             value={inputsValue.zip}
             onChange={handleInputsChange}
           />
-          {errorsState && errorsState.zip && (
-            <Alert severity="warning">{errorsState.zip}</Alert>
-          )}
         </Grid>
+        {errorsState && errorsState.zip && (
+          <Alert severity="warning">{errorsState.zip}</Alert>
+        )} */}
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -173,10 +171,10 @@ const AddressForm = ({ onNextClick }) => {
             value={inputsValue.country}
             onChange={handleInputsChange}
           />
-          {errorsState && errorsState.country && (
-            <Alert severity="warning">{errorsState.country}</Alert>
-          )}
         </Grid>
+        {errorsState && errorsState.country && (
+          <Alert severity="warning">{errorsState.country}</Alert>
+        )}
         <Grid item xs={12}>
           <FormControlLabel
             control={
