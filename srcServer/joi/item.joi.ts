@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { IAddress, IImage } from "../@types/user";
 import { expirationDateRegex, phoneRegex } from "./patterns";
-import { IItem, IPayment, IPrice } from "../@types/item";
+import { IItem } from "../@types/item";
 
 const schema = Joi.object<IItem>({
   title: Joi.string().min(1).max(50).required(),
@@ -14,12 +14,9 @@ const schema = Joi.object<IItem>({
     city: Joi.string().min(2).max(50).required(),
     street: Joi.string().min(2).max(100).required(),
     houseNumber: Joi.number().min(0).max(999999).required(),
-   // zip: Joi.string().min(2).max(30).allow(""),
+    // zip: Joi.string().min(2).max(30).allow(""),
   }),
-  price: Joi.object<IPrice>({
-    value: Joi.number().min(1).max(999999).required(),
-    currency: Joi.string().min(1).max(4).required(),
-  }),
+  price: Joi.number().min(1).max(999999).required(),
   image: Joi.object<IImage>({
     url: Joi.string().min(12).max(200).allow(""),
     alt: Joi.string().min(2).max(200).allow(""),

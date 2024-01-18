@@ -118,10 +118,7 @@ Content-Type: application/json
     "phone": "050-4186390",
     "title": "Bag222",
     "brand": "Gucci",
-    "price": {
-     "value": 350,
-      "currency": "$"
-    },
+    "price":350,
     "description":
       "Gucci Blondie Shoulder Bag in 12A quality with Gucci green box. gently used for 3 months, embodying both style and sophistication"
   }
@@ -155,10 +152,7 @@ Content-Type: application/json
     "phone": "050-4186390",
     "title": "Bag222!!!!!!",
     "brand": "Gucci",
-    "price": {
-     "value": 350,
-      "currency": "$"
-    },
+    "price":350,
     "description":
       "Gucci Blondie Shoulder Bag in 12A quality with Gucci green box. gently used for 3 months, embodying both style and sophistication"
   }
