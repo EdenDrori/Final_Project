@@ -5,16 +5,13 @@ const inputsValueObj = () => {
     phone: "",
     size: "",
     description: "",
-    value: "",
-    currency: "",
+    price: "",
     url: "",
     alt: "",
-    
     country: "",
     city: "",
     street: "",
     houseNumber: "",
-    //zip: "",
   };
   return inputs;
 };

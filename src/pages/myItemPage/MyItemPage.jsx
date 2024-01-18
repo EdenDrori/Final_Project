@@ -36,7 +36,6 @@ const MyItemPage = () => {
   const [errorsState, setErrorsState] = useState(null);
   const [inputsValue, setInputsValue] = useState({
     fullName: "",
-
     branch: "",
     accountNumber: "",
   });
@@ -57,7 +56,7 @@ const MyItemPage = () => {
         let sum = 0;
         for (let item of data) {
           if (item.status === "sold") {
-            const price = item.price.value;
+            const price = item.price;
             console.log(price);
             sum += price;
           } else {
@@ -67,6 +66,19 @@ const MyItemPage = () => {
         console.log(data);
         setMoneyForWithdrawal(sum);
       });
+    } catch (e) {
+      console.log(e, "errorrrrr");
+    }
+  }, [moneyForWithdrawal]);
+  useEffect(() => {
+    try {
+      axios
+        .get(
+          `https://openexchangerates.org/api/convert/${moneyForWithdrawal}/USD/ILS?app_id=2459a5d4cea54fef8a269ec4e5aef5b6&prettyprint=false`
+        )
+        .then(({ data }) => {
+          console.log(data);
+        });
     } catch (e) {
       console.log(e, "errorrrrr");
     }
@@ -223,7 +235,7 @@ const MyItemPage = () => {
                   _id={item._id}
                   title={item.title}
                   brand={item.brand}
-                  price={`${item.price.value}  ${item.price.currency}`}
+                  price={`${item.price}  $`}
                   size={item.size}
                   phone={item.phone}
                   address={`${item.address.city}, ${item.address.street} ${item.address.houseNumber}`}

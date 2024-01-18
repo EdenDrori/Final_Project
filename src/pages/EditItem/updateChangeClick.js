@@ -25,10 +25,7 @@ const updateChangesClick = async (
         url: inputsValue.url,
         alt: inputsValue.alt,
       },
-      price: {
-        value: inputsValue.value,
-        currency: inputsValue.currency,
-      },
+      price: inputsValue.price,
       address: {
         country: inputsValue.country,
         city: inputsValue.city,

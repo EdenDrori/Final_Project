@@ -24,8 +24,8 @@ const Review = ({address}) => {
   const [itemDetails, setItemDetails] = useState({
     title: "",
     description: "",
-    value: "",
-    currency: "",
+    price: "",
+   
   });
   useEffect(() => {
     axios
@@ -34,8 +34,8 @@ const Review = ({address}) => {
         setItemDetails({
           title: data.title,
           description: data.description,
-          value: data.price.value,
-          currency: data.price.currency,
+          price: data.price,
+          
         });
       })
       .catch((err) => {});
@@ -56,7 +56,7 @@ const Review = ({address}) => {
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            {itemDetails.value} {itemDetails.currency}
+            {itemDetails.price} $
           </Typography>
         </ListItem>
       </List>

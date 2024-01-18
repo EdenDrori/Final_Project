@@ -108,29 +108,18 @@ const AddItem = () => {
           <Alert severity="warning">{errorsState.description}</Alert>
         )}
         <TextField
-          id="value"
-          label="value"
+          id="price"
+          label="Price ($)"
           variant="outlined"
           sx={{ mt: "10px" }}
           onChange={handleInputChange}
-          value={inputsValue.value}
+          value={inputsValue.price}
           required
         />
-        {errorsState && errorsState.value && (
-          <Alert severity="warning">{errorsState.value}</Alert>
+        {errorsState && errorsState.price && (
+          <Alert severity="warning">{errorsState.price}</Alert>
         )}
-        <TextField
-          id="currency"
-          label="currency"
-          variant="outlined"
-          sx={{ mt: "10px" }}
-          onChange={handleInputChange}
-          value={inputsValue.currency}
-          required
-        />
-        {errorsState && errorsState.currency && (
-          <Alert severity="warning">{errorsState.currency}</Alert>
-        )}
+   
         <TextField
           id="size"
           label="size"

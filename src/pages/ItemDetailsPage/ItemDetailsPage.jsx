@@ -61,7 +61,7 @@ const ItemDetailsPage = () => {
             {inputsValue.description}
           </Typography>
           <Typography variant="h5" sx={{ mb: 1, padding: "3px", ml: "7px" }}>
-            {inputsValue.value} {inputsValue.currency}
+            {inputsValue.price} $
           </Typography>
           <Typography variant="h5" sx={{ mb: 1, padding: "3px", ml: "7px" }}>
             {inputsValue.size}

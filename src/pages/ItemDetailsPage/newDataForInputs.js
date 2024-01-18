@@ -4,18 +4,16 @@ const newDataForInputs = (data) => {
     brand: data.brand,
     description: data.description,
     phone: data.phone,
-    value: data.price.value,
-    currency: data.price.currency,
+    price: data.price,
     size: data.size,
     url: data.image.url,
     alt: data.image.alt,
-   
     country: data.address.country,
     city: data.address.city,
     street: data.address.street,
     houseNumber: data.address.houseNumber,
     status: data.status,
-    //zip: +data.address.zip,
+   
   };
   return newData;
 };

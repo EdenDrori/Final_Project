@@ -4,10 +4,7 @@ const normalizeDataItem = (inputsValue) => {
     brand: inputsValue.brand,
     description: inputsValue.description,
     phone: inputsValue.phone,
-    price: {
-      value: inputsValue.value,
-      currency: inputsValue.currency,
-    },
+    price:inputsValue.price,
     size: inputsValue.size,
     image: {
       url: inputsValue.url,

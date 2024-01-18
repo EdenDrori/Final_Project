@@ -65,7 +65,7 @@ const FavoritePage = () => {
               _id={item._id}
               title={item.title}
               brand={item.brand}
-              price={`${item.price.value}  ${item.price.currency}`}
+              price={`${item.price} $ `}
               size={item.size}
               phone={item.phone}
               //address={`${item.address.city}, ${item.address.street} ${item.address.houseNumber}`}

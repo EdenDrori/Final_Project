@@ -177,7 +177,7 @@ const ItemsPage = () => {
                   _id={item._id}
                   title={item.title}
                   brand={item.brand}
-                  price={`${item.price.value}  ${item.price.currency}`}
+                  price={`${item.price}  $`}
                   size={item.size}
                   status={item.status}
                   phone={item.phone}
