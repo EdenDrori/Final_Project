@@ -67,7 +67,7 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
   const handleLogoutLink = () => {
     if (isLoggedinOrOut) {
       navigate(ROUTES.LOGOUT);
-      console.log(isLoggedinOrOut, "logOut");
+      //console.log(isLoggedinOrOut, "logOut");
     } else {
       navigate(ROUTES.LOGIN);
     }

@@ -5,7 +5,10 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
-const PaymentForm=()=> {
+const PaymentForm = ({ handleInputsChange, inputsValue }) => {
+  const handleInputs = (e) => {
+    handleInputsChange(e);
+  };
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -20,6 +23,8 @@ const PaymentForm=()=> {
             fullWidth
             autoComplete="cc-name"
             variant="standard"
+            value={inputsValue.cardName}
+            onChange={handleInputs}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -30,6 +35,8 @@ const PaymentForm=()=> {
             fullWidth
             autoComplete="cc-number"
             variant="standard"
+            value={inputsValue.cardNumber}
+            onChange={handleInputs}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -40,6 +47,8 @@ const PaymentForm=()=> {
             fullWidth
             autoComplete="cc-exp"
             variant="standard"
+            value={inputsValue.cardExpDate}
+            onChange={handleInputs}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -51,6 +60,8 @@ const PaymentForm=()=> {
             fullWidth
             autoComplete="cc-csc"
             variant="standard"
+            value={inputsValue.cvv}
+            onChange={handleInputs}
           />
         </Grid>
         <Grid item xs={12}>
@@ -62,5 +73,5 @@ const PaymentForm=()=> {
       </Grid>
     </React.Fragment>
   );
-}
+};
 export default PaymentForm;

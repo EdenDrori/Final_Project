@@ -15,46 +15,48 @@ import { checkoutNormalize } from "./checkoutNormalize";
 import { inputsValueObjCheckout } from "./inputsValueObjCheckout";
 import { validateAddress } from "../../validation/validateAddress";
 
-const AddressForm = ({ refferns }) => {
+const AddressForm = ({ handleInputsChange1, inputsValue1 }) => {
   const [errorsState, setErrorsState] = useState(null);
-  const [inputsValue, setInputsValue] = useState(inputsValueObjCheckout);
-  refferns = inputsValue;
-  useEffect(() => {
-    let token = getToken();
-    let idFromToken = jwtDecode(token)._id;
-    axios
-      .get(`/users/${idFromToken}`)
-      .then(({ data }) => {
-        //console.log(data);
-        const newData = checkoutNormalize(data.user);
-        //console.log(newData, "new");
-        setInputsValue(newData);
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.info("Error from server, can't get your profile", {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      });
-  }, []);
-
-  const handleInputsChange = (e) => {
-    setInputsValue((currentState) => {
-      const newState = {
-        ...currentState,
-        [e.target.id]: e.target.value,
-      };
-      return newState;
-      // Set the current value of the ref to the updated state
-      // refferns.current = newState;
-      // console.log(newState);
-      // return newState;
-    });
+ 
+  //refferns = inputsValue;
+  // useEffect(() => {
+  //   let token = getToken();
+  //   let idFromToken = jwtDecode(token)._id;
+  //   axios
+  //     .get(`/users/${idFromToken}`)
+  //     .then(({ data }) => {
+  //       //console.log(data);
+  //       const newData = checkoutNormalize(data.user);
+  //       console.log(newData, "new");
+  //       setInputsValue(newData);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       toast.info("Error from server, can't get your profile", {
+  //         position: toast.POSITION.TOP_CENTER,
+  //       });
+  //     });
+  // }, []);
+  const handleInputs = (e) => {
+    handleInputsChange1(e);
   };
-  useEffect(() => {
-    // Update refferns.current whenever inputsValue changes
-    refferns.current = inputsValue;
-  }, [inputsValue, refferns]);
+  // const handleInputsChange = (e) => {
+  //   setInputsValue((currentState) => {
+  //     const newState = {
+  //       ...currentState,
+  //       [e.target.id]: e.target.value,
+  //     };
+  //     return newState;
+  //     // Set the current value of the ref to the updated state
+  //     // refferns.current = newState;
+  //     // console.log(newState);
+  //     // return newState;
+  //   });
+  // };
+  // useEffect(() => {
+  //   // Update refferns.current whenever inputsValue changes
+  //   refferns.current = inputsValue;
+  // }, [inputsValue, refferns]);
   //   const handleNextButton = () => {
   //     const joiResponse = validateAddress(address);
   //     setErrorsState(joiResponse);
@@ -78,8 +80,8 @@ const AddressForm = ({ refferns }) => {
             fullWidth
             autoComplete="given-name"
             variant="standard"
-            value={inputsValue.first}
-            onChange={handleInputsChange}
+            value={inputsValue1.first}
+            onChange={handleInputs}
           />
         </Grid>
         {errorsState && errorsState.first && (
@@ -94,8 +96,8 @@ const AddressForm = ({ refferns }) => {
             fullWidth
             autoComplete="family-name"
             variant="standard"
-            value={inputsValue.last}
-            onChange={handleInputsChange}
+            value={inputsValue1.last}
+            onChange={handleInputs}
           />
         </Grid>
         {errorsState && errorsState.last && (
@@ -106,27 +108,18 @@ const AddressForm = ({ refferns }) => {
             required
             id="street"
             name="address1"
-            label="Address line 1"
+            label="Address (street and house number)"
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
-            value={inputsValue.street}
-            onChange={handleInputsChange}
+            value={inputsValue1.street}
+            onChange={handleInputs}
           />
         </Grid>
         {errorsState && errorsState.street && (
           <Alert severity="warning">{errorsState.street}</Alert>
         )}
-        {/* <Grid item xs={12}>
-          <TextField
-            id="address2"
-            name="address2"
-            label="Address line 2"
-            fullWidth
-            autoComplete="shipping address-line2"
-            variant="standard"
-          />
-        </Grid> */}
+
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -136,29 +129,14 @@ const AddressForm = ({ refferns }) => {
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
-            value={inputsValue.city}
-            onChange={handleInputsChange}
+            value={inputsValue1.city}
+            onChange={handleInputs}
           />
         </Grid>
         {errorsState && errorsState.city && (
           <Alert severity="warning">{errorsState.city}</Alert>
         )}
-        {/* <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            fullWidth
-            autoComplete="shipping postal-code"
-            variant="standard"
-            value={inputsValue.zip}
-            onChange={handleInputsChange}
-          />
-        </Grid>
-        {errorsState && errorsState.zip && (
-          <Alert severity="warning">{errorsState.zip}</Alert>
-        )} */}
+
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -168,8 +146,8 @@ const AddressForm = ({ refferns }) => {
             fullWidth
             autoComplete="shipping country"
             variant="standard"
-            value={inputsValue.country}
-            onChange={handleInputsChange}
+            value={inputsValue1.country}
+            onChange={handleInputs}
           />
         </Grid>
         {errorsState && errorsState.country && (

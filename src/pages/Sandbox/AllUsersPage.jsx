@@ -126,10 +126,14 @@ const AllUsersPage = () => {
                 <Divider />
                 <br />
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  {`Email:  ${user.email}`}
+                  {`Email:`}
+                  <br />
+                  {` ${user.email}`}
                 </Typography>
                 <Typography variant="body2">
-                  {`User Id:  ${user._id}`}
+                  {`User Id: `}
+                  <br />
+                  {` ${user._id}`}
                 </Typography>
                 <Divider />
                 <FormControlLabel

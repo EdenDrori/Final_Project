@@ -148,7 +148,7 @@ const HomePage = () => {
           </Typography>
           <Typography
             variant="h6"
-            sx={{ textAlign: "center", marginBottom: "1%", fontWeight: "100" }}
+            sx={{ textAlign: "center", marginBottom: "1%", fontWeight: "100",paddingLeft:"1%",paddingRight:"1%" }}
           >
             You can like your favorite items and post your oun items for sell
           </Typography>
@@ -158,32 +158,53 @@ const HomePage = () => {
               border: "2px solid rgba(0, 0, 0, 0.15)",
               backgroundColor: "rgba(255, 255, 255, 0.9)",
               marginBottom: "3%",
+              whiteSpace: "nowrap",
             }}
             onClick={handleSignup}
           >
             Sign up
           </Button>
         </Box>
-        <Grid container>
+        <Grid container sx={{marginBottom:"6%"}}>
           <Grid
             item
-            xs={4}
+            xs={0}
+            md={4}
+            lg={4}
             sx={{
               height: "60vh",
               backgroundImage: `url(${blackLeaves})`,
               backgroundSize: "cover",
             }}
           ></Grid>
-          <Grid item xs={8}>
+          <Grid
+            item
+            xs={12}
+            md={8}
+            lg={8}
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
             <Typography
               variant="h6"
               sx={{
-                marginBottom: "7%",
+                marginBottom: "1%",
                 fontWeight: "100",
                 backgroundColor: "sectionBackground.default",
                 marginLeft: "5%",
                 paddingRight: "2%",
                 paddingLeft: "2%",
+                "@media (max-width:900px)": {
+                  textAlign: "center",
+                  marginLeft: "0",
+                },
               }}
             >
               Welcome to our Vintage Emporium! 🌟
@@ -213,7 +234,13 @@ const HomePage = () => {
             </Button>
           </Grid>
         </Grid>
-        <Box sx={{ backgroundColor: "sectionBackground.default", paddingY: 4,marginBottom:"25px" }}>
+        <Box
+          sx={{
+            backgroundColor: "sectionBackground.default",
+            paddingY: 4,
+            marginBottom: "25px",
+          }}
+        >
           <Container>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6} md={4} sx={{ textAlign: "center" }}>

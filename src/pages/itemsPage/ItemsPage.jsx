@@ -17,7 +17,7 @@ const ItemsPage = () => {
   const [initialFilteredData, setInitialFilteredData] = useState([]);
   const [refreshState, setRefreshState] = useState("");
   const navigate = useNavigate();
-  
+
   const userData = useSelector((bigPie) => bigPie.authSlice.userData);
   const query = useQueryParams();
   useEffect(() => {
@@ -27,9 +27,9 @@ const ItemsPage = () => {
     axios
       .get("/items")
       .then(({ data }) => {
-        console.log("data", data);
+        //console.log("data", data);
         if (userData) data = likeItemNormalization(data, userData._id);
-        console.log("userData", userData);
+        //console.log("userData", userData);
         setInitialDataFromServer(data);
         setDataFromServer(data);
       })
@@ -140,7 +140,7 @@ const ItemsPage = () => {
     );
   };
   const handleCategoryButton = (e) => {
-    console.log(initialDataFromServer);
+    // console.log(initialDataFromServer);
     if (!initialDataFromServer.length) return;
     const category = e.target.value;
     navigate(`${ROUTES.ITEMS}?filter=${category}`);
@@ -150,7 +150,6 @@ const ItemsPage = () => {
     );
   };
 
- 
   // const handleDressesFilter = () => {
   //   console.log(initialDataFromServer);
   //   if (!initialDataFromServer.length) return;

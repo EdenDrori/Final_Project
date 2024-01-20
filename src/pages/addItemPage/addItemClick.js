@@ -7,7 +7,7 @@ import ROUTES from "../../routes/ROUTES";
 const addItemClick = async (inputsValue, setErrorsState, navigate) => {
   try {
     const joiResponse = validateItem(inputsValue);
-     console.log(joiResponse);
+     //console.log(joiResponse);
     setErrorsState(joiResponse);
    
     if (joiResponse) return;
@@ -26,7 +26,7 @@ const addItemClick = async (inputsValue, setErrorsState, navigate) => {
     });
     navigate(ROUTES.MYITEM);
   } catch (err) {
-    console.log(err, "err");
+    //console.log(err, "err");
     toast("Somthing is missing... try again", {
       position: "top-center",
       autoClose: 5000,

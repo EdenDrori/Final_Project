@@ -129,7 +129,7 @@ const ItemComponent = ({
           sx={{
             height: "30vh",
             objectFit: "cover",
-            height: "100%",
+            //height: "100%",
             width: "100%", // Ensure the image takes the full width of the container
           }}
         />

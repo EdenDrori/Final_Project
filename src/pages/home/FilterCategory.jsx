@@ -25,18 +25,29 @@ const FilterCategory = () => {
   };
 
   return (
-    <Grid container sx={{ flexWrap: "nowrap" }}>
+    <Grid
+      container
+      sx={{
+        "@media (max-width:600px)": {
+          flexWrap: "wrap",
+        },
+        "@media (min-width:601px)": {
+          flexWrap: "nowrap",
+        },
+      }}
+    >
       <Grid
         item
         key={nextKey()}
         xs={12}
-        sm={4}
+        sm={12}
         md={4}
         lg={4}
         sx={{
           margin: "1%",
           backgroundImage: `url(${clothPhoto})`,
           backgroundSize: "cover",
+          backgroundPosition:"center",
           height: "40vh",
           width: "20vw",
         }}
@@ -67,13 +78,14 @@ const FilterCategory = () => {
         item
         key={nextKey()}
         xs={12}
-        sm={6}
+        sm={12}
         md={4}
         lg={4}
         sx={{
           margin: "1%",
           backgroundImage: `url(${accsesorisePhoto})`,
           backgroundSize: "cover",
+          backgroundPosition:"center",
           height: "40vh",
           width: "20vw",
         }}
@@ -104,13 +116,14 @@ const FilterCategory = () => {
         item
         key={nextKey()}
         xs={12}
-        sm={6}
+        sm={12}
         md={4}
         lg={4}
         sx={{
           margin: "1%",
           backgroundImage: `url(${shoePhoto})`,
           backgroundSize: "cover",
+          backgroundPosition:"center",
           height: "40vh",
           width: "20vw",
         }}

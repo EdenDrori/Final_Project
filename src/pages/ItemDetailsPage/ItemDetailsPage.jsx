@@ -76,7 +76,12 @@ const ItemDetailsPage = () => {
           <Typography variant="h5" sx={{ mb: 1, padding: "3px", ml: "7px" }}>
             {inputsValue.status}
           </Typography>
-          <Button onClick={handleCheckout}>Buy Now 🛒</Button>
+          <Button
+            variant={inputsValue.status === "sold" ? "disabled" : "text"}
+            onClick={handleCheckout}
+          >
+            Buy Now 🛒
+          </Button>
         </Grid>
       </Grid>
       <Button onClick={handleBackItems}>Back to all items</Button>

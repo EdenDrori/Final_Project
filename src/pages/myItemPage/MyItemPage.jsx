@@ -24,6 +24,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import ItemComponent from "../../components/ItemComponent";
 import { validateBankDetails } from "../../validation/bankValidation";
+import ConvertCurrency from "./ConvertUSDtoILS";
 
 const MyItemPage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
@@ -44,7 +45,7 @@ const MyItemPage = () => {
   useEffect(() => {
     try {
       axios.get("/items/my-items").then(({ data }) => {
-        console.log(data);
+        //console.log(data);
         const isItems = data.message;
         if (isItems) {
           //console.log(data.message);
@@ -57,32 +58,34 @@ const MyItemPage = () => {
         for (let item of data) {
           if (item.status === "sold") {
             const price = item.price;
-            console.log(price);
+            //console.log(price);
             sum += price;
           } else {
-            console.log(sum);
+            // console.log(sum);
           }
         }
-        console.log(data);
+        //console.log(data);
         setMoneyForWithdrawal(sum);
       });
     } catch (e) {
-      console.log(e, "errorrrrr");
+      //console.log(e, "errorrrrr");
     }
   }, [moneyForWithdrawal]);
-  useEffect(() => {
-    try {
-      axios
-        .get(
-          `https://openexchangerates.org/api/convert/${moneyForWithdrawal}/USD/ILS?app_id=2459a5d4cea54fef8a269ec4e5aef5b6&prettyprint=false`
-        )
-        .then(({ data }) => {
-          console.log(data);
-        });
-    } catch (e) {
-      console.log(e, "errorrrrr");
-    }
-  }, [moneyForWithdrawal]);
+  //   useEffect(() => {
+  //     try {
+  //       axios
+  //         .get(
+  //           `http://data.fixer.io/api/latest69eb4eb0b7cdf5687d7f3464639f7935
+  // `
+  //         )
+  //         .then(({ data }) => {
+  //           console.log(data);
+  //         });
+  //     } catch (e) {
+  //       console.log()
+  //       console.log(e, "errorrrrr");
+  //     }
+  //   }, [moneyForWithdrawal]);
   const handleEditItem = (_id) => {
     navigate(`${ROUTES.EDITITEM}/${_id}`);
   };
@@ -147,9 +150,9 @@ const MyItemPage = () => {
     setAnchorEl(null);
   };
   const handleDeleteSoldItems = async () => {
-    console.log(dataFromServer);
+    //console.log(dataFromServer);
     const data = dataFromServer;
-    console.log(data);
+    //console.log(data);
     for (let item of data) {
       // console.log(item);
       // console.log(item.status);
@@ -173,17 +176,17 @@ const MyItemPage = () => {
             theme: "light",
           });
         }
-        console.log(dataFromServer);
-        console.log("item", item.status);
+        // console.log(dataFromServer);
+        // console.log("item", item.status);
       } else {
-        console.log(item);
+        // console.log(item);
       }
     }
   };
   const handleSubmit = () => {
     const joiResponse = validateBankDetails(inputsValue);
     setErrorsState(joiResponse);
-    console.log(joiResponse);
+    // console.log(joiResponse);
     if (joiResponse) return;
     if (!bankS) {
       setErrorsState(!bankS);
@@ -191,7 +194,7 @@ const MyItemPage = () => {
       return;
     }
     handleDeleteSoldItems();
-    console.log(inputsValue);
+    //console.log(inputsValue);
     setAnchorEl(null);
   };
 
@@ -199,11 +202,11 @@ const MyItemPage = () => {
   const id = open ? "simple-popover" : undefined;
 
   const handleChangeBank = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     let bank = event.target.value;
     setBank(bank);
 
-    console.log(bankS);
+    //console.log(bankS);
   };
 
   return (
@@ -262,9 +265,8 @@ const MyItemPage = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-end",
               textAlign: "center",
-              height: "70%",
+              height: "auto",
               backgroundColor: "background.default",
               pt: 2,
               pr: 1,
@@ -274,7 +276,12 @@ const MyItemPage = () => {
             <Typography variant="h4">Account Balance</Typography>
 
             <Typography variant="h2">{moneyForWithdrawal}</Typography>
-
+            <Box sx={{ backgroundColor: "sectionBackground.default" }}>
+              <ConvertCurrency
+                api_key={"69eb4eb0b7cdf5687d7f3464639f7935"}
+                amount={moneyForWithdrawal}
+              />
+            </Box>
             <Button
               variant={!moneyForWithdrawal ? "disabled" : "contained"}
               sx={{
@@ -411,16 +418,17 @@ const MyItemPage = () => {
           variant="outlined"
           sx={{
             mt: 2,
-            width: "30%",
+            width: "auto",
             marginLeft: "auto",
             marginRight: "auto",
             marginBottom: "15px",
             display: "flex",
             justifyContent: "center",
+            whiteSpace: "nowrap",
           }}
           onClick={handleAddItem}
         >
-          Add your item
+          Add new item
         </Button>
       </Grid>
     </Container>

@@ -42,7 +42,7 @@ const RegisterPage = () => {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
-    console.log(file);
+   // console.log(file);
   };
 
   const handleSubmit = (event) => {

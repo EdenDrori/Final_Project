@@ -29,9 +29,9 @@ const ProfilePage = () => {
       .get(`/users/${idFromToken}`)
       .then(({ data }) => {
         //console.log(idFromToken);
-        console.log(data);
+       // console.log(data);
         const newData = normalizeDataFromServer(data.user);
-        console.log(newData, "new");
+        //console.log(newData, "new");
         setInputsValue(newData);
       })
       .catch((err) => {
@@ -125,7 +125,7 @@ const ProfilePage = () => {
           <ListItem sx={{ display: { xs: "none", md: "block" } }}>
             <ListItemText primary="Alt" secondary={inputsValue.alt} />
           </ListItem> */}
-          
+
           <ListItem>
             <ListItemText primary="Country" secondary={inputsValue.country} />
           </ListItem>
@@ -141,18 +141,18 @@ const ProfilePage = () => {
               secondary={inputsValue.houseNumber}
             />
           </ListItem>
-          
         </List>
         <Button
           variant="outlined"
           sx={{
             mt: 2,
-            width: "30%",
+            width: "auto",
             marginLeft: "auto",
             marginRight: "auto",
             marginBottom: "15px",
             display: "flex",
             justifyContent: "center",
+            whiteSpace: "nowrap",
           }}
           onClick={handleEdit}
         >

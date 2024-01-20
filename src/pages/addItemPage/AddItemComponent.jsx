@@ -35,7 +35,7 @@ const AddItem = () => {
     //console.log(inputsValue);
   };
   const handleUploadImage = (e) => {
-    console.log(e.target.files);
+    //console.log(e.target.files);
     //console.log(file, "file");
     setFile(URL.createObjectURL(e.target.files[0]));
   };

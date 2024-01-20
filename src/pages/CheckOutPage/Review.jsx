@@ -9,15 +9,19 @@ import { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const addresses = ["1 MUI Drive", "Reactville", "Anytown", "99999", "USA"];
-const payments = [
-  { name: "Card type", detail: "Visa" },
-  { name: "Card holder", detail: "Mr John Smith" },
-  { name: "Card number", detail: "xxxx-xxxx-xxxx-1234" },
-  { name: "Expiry date", detail: "04/2024" },
-];
-
-const Review = ({address}) => {
+const Review = ({ inputsValue, inputsValue1,dataFromServer }) => {
+  const addresses = [
+    inputsValue1.street,
+    inputsValue1.city,
+    inputsValue1.country,
+    inputsValue1.first,
+    inputsValue1.last,
+  ];
+  const payments = [
+    { name: "Card holder", detail: inputsValue.cardName },
+    { name: "Card number", detail: inputsValue.cardNumber },
+    { name: "Expiry date", detail: inputsValue.cardExpDate },
+  ];
   const { _id } = useParams();
   //console.log(_id);
   //console.log("address",address);
@@ -25,21 +29,22 @@ const Review = ({address}) => {
     title: "",
     description: "",
     price: "",
-   
   });
-  useEffect(() => {
-    axios
-      .get("/items/" + _id)
-      .then(({ data }) => {
-        setItemDetails({
-          title: data.title,
-          description: data.description,
-          price: data.price,
-          
-        });
-      })
-      .catch((err) => {});
-  }, []);
+  //  setItemDetails(dataFromServer);
+   console.log(dataFromServer);
+  // console.log(itemDetails);
+  // // useEffect(() => {
+  //   axios
+  //     .get("/items/" + _id)
+  //     .then(({ data }) => {
+  //       setItemDetails({
+  //         title: data.title,
+  //         description: data.description,
+  //         price: data.price,
+  //       });
+  //     })
+  //     .catch((err) => {console.log(err);});
+  // }, []);
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -48,15 +53,15 @@ const Review = ({address}) => {
       <List disablePadding>
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText
-            primary={itemDetails.title}
-            secondary={itemDetails.description}
+            primary={dataFromServer.title}
+            secondary={dataFromServer.description}
           />
         </ListItem>
 
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            {itemDetails.price} $
+            {dataFromServer.price} $
           </Typography>
         </ListItem>
       </List>
@@ -65,7 +70,9 @@ const Review = ({address}) => {
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
+          <Typography gutterBottom>
+            {inputsValue1.first} {inputsValue1.last}
+          </Typography>
           <Typography gutterBottom>{addresses.join(", ")}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>

@@ -16,42 +16,148 @@ import Typography from "@mui/material/Typography";
 import AddressForm from "./AddressForm";
 import Payment from "./Payment";
 import Review from "./Review";
+import axios from "axios";
+import { useNavigate ,useParams} from "react-router-dom";
 import { validateAddress } from "../../validation/validateAddress";
 import { inputsValueObjCheckout } from "./inputsValueObjCheckout";
+import { checkoutNormalize } from "./checkoutNormalize";
+import { getToken } from "../../service/storageService";
+import { jwtDecode } from "jwt-decode";
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   // const [address, setAddress] = React.useState(inputsValueObjCheckout);
-  const addressRef = React.useRef();
-
+  //const navigate = useNavigate();
+  //const [thisAble, setAble] = React.useState(true);
+  //const addressRef = React.useRef();
+  const [inputsValue, setInputsValue] = React.useState({
+    change: "",
+  });
+  const [inputsValue1, setInputsValue1] = React.useState({
+    first: "",
+    last: "",
+    country: "",
+    city: "",
+    street: "",
+    //houseNumber: "",
+  });
+  const [dataFromServer, setDataFromServer] = React.useState();
+    const { _id } = useParams();
+    useEffect(() => {
+      let token = getToken();
+      let idFromToken = jwtDecode(token)._id;
+      axios
+        .get(`/users/${idFromToken}`)
+        .then(({ data }) => {
+          //console.log(data);
+          const newData = checkoutNormalize(data.user);
+         // console.log(newData, "new");
+          setInputsValue1(newData);
+        })
+        .catch((err) => {
+          //console.log(err);
+          // toast.info("Error from server, can't get your profile", {
+          //   position: toast.POSITION.TOP_CENTER,
+          // });
+        });
+    }, []);
+  useEffect(() => {
+    axios
+      .get("/items/" + _id)
+      .then(({ data }) => {
+        setDataFromServer({
+          title: data.title,
+          description: data.description,
+          price: data.price,
+        });
+        //console.log(dataFromServer);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  const handleInputsChange1 = (e) => {
+    setInputsValue1((currentState) => ({
+      ...currentState,
+      [e.target.id]: e.target.value,
+    }));
+    //chargeAble(inputsValue, setAble);
+  };
+  const handleInputsChange = (e) => {
+    setInputsValue((currentState) => ({
+      ...currentState,
+      [e.target.id]: e.target.value,
+    }));
+    //chargeAble2(inputsValue, setAble);
+  };
   // useEffect(() => {
   //   console.log(addressRef);
   // }, [addressRef]);
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <AddressForm refferns={addressRef} />;
+        return (
+          <AddressForm
+            handleInputsChange1={handleInputsChange1}
+            inputsValue1={inputsValue1}
+          />
+        );
 
       case 1:
-        return <Payment />;
+        return (
+          <Payment
+            handleInputsChange={handleInputsChange}
+            inputsValue={inputsValue}
+          />
+        );
       case 2:
-        return <Review />;
+        return (
+          <Review
+            inputsValue={inputsValue}
+            inputsValue1={inputsValue1}
+            dataFromServer={dataFromServer}
+          />
+        );
       default:
         throw new Error("Unknown step");
     }
   };
 
   // const [addressInfo, setAddressInfo] = React.useState({});
-
+  const handleSoldItem =async () => {
+     try {
+    // const joiResponse = validateItem(inputsValue);
+    // setErrorsState(joiResponse);
+    // if (joiResponse) return;
+    const { data } = await axios.put("/items/" + _id, {
+      
+      status: "sold",
+      
+    });
+   // console.log(data);
+  } catch (err) {
+    console.log(err);
+    // toast("Somthing is missing... try again", {
+    //   position: "top-center",
+    //   autoClose: 5000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: "light",
+    // });
+  }
+  };
   const handleNext = () => {
-    if (activeStep === 0) {
-      // const joiResponse = validateAddress(addressInfo);
-      // console.log(joiResponse);
-      // if (joiResponse) return;
-      console.log("Address Form Data:", addressRef.current);
-    }
+    // if (activeStep === 0) {
+    //   // const joiResponse = validateAddress(addressInfo);
+    //   // console.log(joiResponse);
+    //   // if (joiResponse) return;
+    //   console.log("Address Form Data:", addressRef.current);
+    // }
 
     setActiveStep(activeStep + 1);
   };
@@ -120,7 +226,11 @@ const Checkout = () => {
 
                 <Button
                   variant="contained"
-                  onClick={handleNext}
+                  onClick={
+                    activeStep === steps.length - 1
+                      ? handleSoldItem
+                      : handleNext
+                  }
                   sx={{ mt: 3, ml: 1 }}
                 >
                   {activeStep === steps.length - 1 ? "Place order" : "Next"}
