@@ -9,13 +9,6 @@ const addressSchema = new Schema<IAddress>({
     maxlength: 50,
   },
 
-  state: {
-    type: String,
-    required: false,
-    default: "",
-    minlength: 0,
-    maxlength: 50,
-  },
 
   country: {
     type: String,
@@ -31,12 +24,12 @@ const addressSchema = new Schema<IAddress>({
     maxlength: 100,
   },
 
-  zip: {
-    type: String,
-    required: false,
-    default: "0",
-    maxlength: 30,
-  },
+  // zip: {
+  //   type: String,
+  //   required: false,
+  //   default: "0",
+  //   maxlength: 30,
+  // },
 
   houseNumber: {
     type: Number,

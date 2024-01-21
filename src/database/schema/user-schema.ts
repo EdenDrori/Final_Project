@@ -43,6 +43,7 @@ const userSchema = new Schema<IUser>({
   isBusiness: {
     type: Boolean,
     required: true,
+    default: false,
   },
   createdAt: {
     type: Date,

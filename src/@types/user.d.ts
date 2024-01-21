@@ -14,8 +14,8 @@ type IAddress = {
 };
 
 type IImage = {
-  alt: string;
-  url: string;
+  alt?: string;
+  url?: string;
 };
 
 type IUser = {

@@ -2,7 +2,7 @@ import { Schema } from "mongoose";
 import { IItem } from "../../@types/item";
 import { addressSchema } from "./address-schema";
 import { imageSchema } from "./image-schema";
-import { priceSchema } from "./price-schema";
+//import { priceSchema } from "./price-schema";
 import { required } from "joi";
 
 const itemSchema = new Schema<IItem>({
@@ -11,7 +11,7 @@ const itemSchema = new Schema<IItem>({
     type: imageSchema,
     required: false,
     default: {
-      url: "https://images.pexels.com/photos/326576/pexels-photo-326576.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      url: "https://i.pinimg.com/564x/cb/c1/c1/cbc1c1aeef9092676adcd3c13a167860.jpg",
       alt: "",
     },
   },
@@ -29,7 +29,7 @@ const itemSchema = new Schema<IItem>({
     maxlength: 50,
   },
   brand: {
-    required: false,
+    required: true,
     type: String,
     minlength: 1,
     maxlength: 50,
@@ -37,12 +37,14 @@ const itemSchema = new Schema<IItem>({
   size: {
     required: false,
     type: String,
-    minlength: 1,
+
     maxlength: 10,
   },
   price: {
     required: true,
-    type: priceSchema,
+    type: Number,
+    minlength: 1,
+    maxlength: 6,
   },
   description: {
     required: true,
@@ -76,11 +78,11 @@ const itemSchema = new Schema<IItem>({
     type: Date,
     default: new Date(),
   },
-  status:{
-    required:false,
-    type:String,
-    enum:["sold","available"]
-  }
+  status: {
+    required: false,
+    type: String,
+    enum: ["sold", "available"],
+  },
 });
 
 export { itemSchema };

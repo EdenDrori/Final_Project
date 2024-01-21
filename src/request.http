@@ -24,15 +24,11 @@ Content-Type: application/json
     "street": "123 Main St",
     "city": "Anytown",
     "country": "Israel",
-    "houseNumber": 20,
-    "zip": "12345"
+    "houseNumber": 20
   },
-  "image": {
-    "alt": "user-profile",
-    "url": "https://picsum.photos/200/300"
-  },
+
   "phone": "050-8123091",
-  "email": "DRORIEEE@gmail.com",
+  "email": "DRORIEEE1@gmail.com",
   "isBusiness": true,
   "password": "123456aA!"
 }
@@ -43,7 +39,7 @@ POST http://localhost:8081/api/v1/users/login
 Content-Type: application/json
 
 {
-  "email": "DRORIEEE@gmail.com",
+  "email": "admin@gmail.com",
   "password": "123456aA!"
 }
 
@@ -99,29 +95,23 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQ
 
 ### POST create item:
 POST http://localhost:8081/api/v1/items
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkRST1JJQGdtYWlsLmNvbSIsImlhdCI6MTcwMzY3MjExN30.P1p8vuIe0cK6LgBe3JJBNLcAsEAxrQcUSWKoQlSgyBg
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkRST1JJRUVFMUBnbWFpbC5jb20iLCJfaWQiOiI2NWE2NTU1ZjhhNWY3ZDFiYmY3MzcyNGUiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzA1Mzk5ODQxfQ.EzMJ0tEdf7sXdYTbdWHb8otYg41-Uivd3kwqThLDnRg
 Content-Type: application/json
 
 {
     "address": {
       "city": "Tel Aviv",
-      "state": "",
+     
       "country": "Israel",
       "street": "Alenbi",
-      "zip": "12345",
+      
       "houseNumber": 20
     },
-    "image": {
-      "url": "https://www.upenmeghastore.com/wp-content/uploads/2023/08/IMG-20230816-WA0026-1.jpg",
-      "alt": "Gucci bag"
-    },
+   
     "phone": "050-4186390",
     "title": "Bag222",
     "brand": "Gucci",
-    "price": {
-     "value": 350,
-      "currency": "$"
-    },
+    "price":350,
     "description":
       "Gucci Blondie Shoulder Bag in 12A quality with Gucci green box. gently used for 3 months, embodying both style and sophistication"
   }
@@ -135,8 +125,8 @@ GET http://localhost:8081/api/v1/items/658bfad7f2ed6a63ee3e81c2
 
 
 ### PUT edit items:
-PUT http://localhost:8081/api/v1/items/658bfad7f2ed6a63ee3e81c2
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkRST1JJQGdtYWlsLmNvbSIsImlhdCI6MTcwMzY3MjExN30.P1p8vuIe0cK6LgBe3JJBNLcAsEAxrQcUSWKoQlSgyBg
+PUT http://localhost:8081/api/v1/items/65a656638a5f7d1bbf737268
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkRST1JJRUVFMUBnbWFpbC5jb20iLCJfaWQiOiI2NWE2NTU1ZjhhNWY3ZDFiYmY3MzcyNGUiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzA1Mzk5ODQxfQ.EzMJ0tEdf7sXdYTbdWHb8otYg41-Uivd3kwqThLDnRg
 Content-Type: application/json
 
 {
@@ -155,10 +145,8 @@ Content-Type: application/json
     "phone": "050-4186390",
     "title": "Bag222!!!!!!",
     "brand": "Gucci",
-    "price": {
-     "value": 350,
-      "currency": "$"
-    },
+    "status":"sold",
+    "price": 350,
     "description":
       "Gucci Blondie Shoulder Bag in 12A quality with Gucci green box. gently used for 3 months, embodying both style and sophistication"
   }
@@ -178,3 +166,9 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkRST1JJQ
 PATCH  http://localhost:8081/api/v1/items/658bfad7f2ed6a63ee3e81c2
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkRST1JJQGdtYWlsLmNvbSIsImlhdCI6MTcwMzY3MjExN30.P1p8vuIe0cK6LgBe3JJBNLcAsEAxrQcUSWKoQlSgyBg
 Content-Type: application/json
+
+###
+GET http://data.fixer.io/api/latest?access_key=69eb4eb0b7cdf5687d7f3464639f7935&base=USD
+
+
+69eb4eb0b7cdf5687d7f3464639f7935

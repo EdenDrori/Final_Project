@@ -3,15 +3,17 @@ import { IImage } from "../../@types/user";
 
 const imageSchema = new Schema<IImage>({
   url: {
-    required: true,
+    required: false,
     type: String,
-    minlength: 12,
+
     maxlength: 200,
+    default:
+      "https://i.pinimg.com/564x/cb/c1/c1/cbc1c1aeef9092676adcd3c13a167860.jpg",
   },
   alt: {
-    required: true,
+    required: false,
     type: String,
-    minlength: 2,
+
     maxlength: 200,
   },
 });
