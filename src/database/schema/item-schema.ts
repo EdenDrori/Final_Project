@@ -83,6 +83,11 @@ const itemSchema = new Schema<IItem>({
     type: String,
     enum: ["sold", "available"],
   },
+  saleDate: {
+    required: false,
+    type: Date,
+    default: null,
+  },
 });
 
 export { itemSchema };

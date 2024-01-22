@@ -9,7 +9,7 @@ export const items = [
       houseNumber: 20,
     },
     image: {
-      url: "../public/assets/gucciBag.jpg",
+      url: "https://firebasestorage.googleapis.com/v0/b/shopapp-1141a.appspot.com/o/images%2FgucciBag.jpg?alt=media&token=7cc93119-9919-4ef6-8130-3d2a780e9f7c",
       alt: "Guccy bag",
     },
     phone: "050-0000000",
@@ -32,7 +32,7 @@ export const items = [
       houseNumber: 59,
     },
     image: {
-      url: "../public/assets/pradaDress.jpg",
+      url: "https://firebasestorage.googleapis.com/v0/b/shopapp-1141a.appspot.com/o/images%2FpradaDress.jpg?alt=media&token=ae402d72-a3ce-4019-94a2-f15599b89047",
       alt: "Prada Dress",
     },
     phone: "050-0000000",
@@ -55,7 +55,7 @@ export const items = [
       houseNumber: 103,
     },
     image: {
-      url: "../public/assets/yslBelt.jpg",
+      url: "https://firebasestorage.googleapis.com/v0/b/shopapp-1141a.appspot.com/o/images%2FyslBelt.jpg?alt=media&token=1adc6db6-5da0-4ebe-b944-ee56c93590b0",
       alt: "YSL Belt",
     },
     phone: "050-0000000",

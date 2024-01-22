@@ -38,6 +38,7 @@ type IItem = IItemInput & {
   _id?: string;
   likes: string[];
   createdAt: Date;
+  saleDate: Date;
 
   //payment?: IPayment;
 };

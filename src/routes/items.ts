@@ -2,7 +2,7 @@ import { Router } from "express";
 import { Item } from "../database/model/item";
 import { validateNewItem } from "../middleware/validation";
 import { IItem, IItemInput } from "../@types/item";
-import { newItem } from "../service/items-service";
+import { markItemAsSold, newItem } from "../service/items-service";
 import { isBusiness } from "../middleware/is-business";
 import { isSeller } from "../middleware/is-seller";
 import { appError } from "../error/app-error";
@@ -67,13 +67,18 @@ router.get("/:id", async (req, res, next) => {
 });
 
 //PUT edit item
-router.put("/:id",  async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const savedItem = await Item.findByIdAndUpdate(
       { _id: req.params.id },
       req.body,
       { new: true }
     );
+    if (savedItem.status === "sold") {
+      const updatedStatus = await markItemAsSold(savedItem._id);
+      console.log(updatedStatus);
+    }
+
     res.json({ message: "Item updeted", savedItem });
   } catch (e) {
     next(e);

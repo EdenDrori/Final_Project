@@ -1,7 +1,7 @@
 import { Item } from "../database/model/item";
 import { IItemInput } from "../@types/item";
+import { ObjectId } from "mongoose";
 const newItem = async (data: IItemInput, userId: string) => {
-  
   const item = new Item(data);
 
   item.userId = userId;
@@ -17,5 +17,29 @@ const newItem = async (data: IItemInput, userId: string) => {
 
   return item.save();
 };
+const markItemAsSold = async (itemId: string) => {
+  try {
+    // Assuming you have your Mongoose model as `Item`
+    const item = await Item.findByIdAndUpdate(
+      itemId,
+      {
+        $set: {
+         // status: "sold",
+          saleDate: new Date(), // Set saleDate to the current date and time
+        },
+      },
+      { new: true }
+    );
 
-export { newItem };
+    if (!item) {
+      console.error("Item not found");
+      return;
+    }
+
+    console.log(`Item "${item.title}" marked as sold.`);
+  } catch (error) {
+    console.error("Error marking item as sold:", error);
+  }
+};
+
+export { newItem, markItemAsSold };
