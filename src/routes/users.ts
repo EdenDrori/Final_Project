@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { User } from "../database/model/user";
 import {
+  validateUserEdit,
   validateUserLogin,
   validateUserRegistration,
 } from "../middleware/validation";
-import { ILogin, IUser } from "../@types/user";
+import { IEditUser, ILogin, IUser } from "../@types/user";
 import { createUser, validateUser } from "../service/user-service";
 import { auth } from "../service/auth-service";
 import { isAdmin } from "../middleware/is-admin";
@@ -29,15 +30,15 @@ router.get("/", isAdmin, async (req, res, next) => {
 });
 
 //PUT edit user
-router.put("/:id", isUser, validateUserRegistration, async (req, res, next) => {
+router.put("/:id", isUser, validateUserEdit, async (req, res, next) => {
   try {
-    //hash the password:
-    req.body.password = await auth.hashPassword(req.body.password);
-    const { password, ...savedUser } = (await User.findByIdAndUpdate(
+  
+  
+    const  savedUser  = (await User.findByIdAndUpdate(
       { _id: req.params.id },
       req.body,
       { new: true }
-    ).lean()) as IUser;
+    ).lean()) as IEditUser;
     Logger.debug(savedUser);
 
     if (!savedUser) {

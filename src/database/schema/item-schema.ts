@@ -83,6 +83,11 @@ const itemSchema = new Schema<IItem>({
     type: String,
     enum: ["sold", "available"],
   },
+  category: {
+    required: false,
+    type: String,
+    enum: ["clothing", "accessories", "shoes", "bags", "others"],
+  },
   saleDate: {
     required: false,
     type: Date,

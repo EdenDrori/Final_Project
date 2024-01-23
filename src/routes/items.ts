@@ -8,6 +8,7 @@ import { isSeller } from "../middleware/is-seller";
 import { appError } from "../error/app-error";
 import { validateToken } from "../middleware/validate-token";
 import { isLiked } from "../middleware/is-liked";
+import { isSellerOrAdmin } from "../middleware/is-seller-or-admin";
 
 const router = Router();
 
@@ -86,7 +87,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 //DELETE item
-router.delete("/:id", isSeller, async (req, res, next) => {
+router.delete("/:id", isSellerOrAdmin, async (req, res, next) => {
   try {
     const { id } = req.params;
 

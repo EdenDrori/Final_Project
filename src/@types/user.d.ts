@@ -30,6 +30,16 @@ type IUser = {
   createdAt?: Date;
   _id?: string;
 };
+type IEditUser = {
+  name: IName;
+  address: IAddress;
+  image?: IImage;
+  phone: string;
+  // isBusiness: boolean;
+  // isAdmin?: boolean;
+  // createdAt?: Date;
+ // _id?: string;
+};
 
 type ILogin = {
   email: string;
@@ -43,4 +53,4 @@ type IJWTPayload = {
   _id: string;
 };
 
-export { IUser, IName, IAddress, IImage, ILogin, IJWTPayload };
+export { IUser, IName, IAddress, IImage, ILogin, IJWTPayload, IEditUser };

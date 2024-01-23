@@ -7,6 +7,7 @@ const schema = Joi.object<IItem>({
   title: Joi.string().min(1).max(50).required(),
   brand: Joi.string().min(1).max(50).required(),
   price: Joi.number().min(1).max(999999).required(),
+  category: Joi.string().min(1).max(20).required(),
   description: Joi.string().min(1).max(200).required(),
   size: Joi.string().max(10).allow(""),
   address: Joi.object<IAddress>({
@@ -21,7 +22,7 @@ const schema = Joi.object<IItem>({
   //   currency: Joi.string().min(1).max(4).required(),
   // }),
   image: Joi.object<IImage>({
-    url: Joi.string().max(200).allow(""),
+    url: Joi.string().max(5000).allow(""),
     alt: Joi.string().max(200).allow(""),
   }),
   phone: Joi.string().min(9).max(15).required().pattern(phoneRegex),

@@ -21,6 +21,7 @@ type IItemInput = {
   title: string;
   brand: string;
   price: number;
+  category: string;
   size?: string;
   description: string;
   price: IPrice;

@@ -17,7 +17,7 @@ const schema = Joi.object<IUser>({
     // zip: Joi.string().min(2).max(30).allow(""),
   }),
   image: Joi.object<IImage>({
-    url: Joi.string().min(12).max(200).allow(""),
+    url: Joi.string().min(12).max(5000).allow(""),
     alt: Joi.string().min(2).max(200).allow(""),
   }),
   email: Joi.string()
