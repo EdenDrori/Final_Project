@@ -7,6 +7,7 @@ import morgan from "morgan";
 import cors from "cors";
 import { itemsRouter } from "./routes/items";
 import { configDotEnv } from "./config";
+import { contactRouter } from "./routes/contact";
 
 configDotEnv();
 connect();
@@ -19,6 +20,7 @@ app.use(json());
 app.use(morgan("dev"));
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/items", itemsRouter);
+app.use("/api/v1/contact", contactRouter);
 app.use(errorHandler);
 app.use(notFound);
 

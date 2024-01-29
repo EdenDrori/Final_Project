@@ -167,8 +167,18 @@ PATCH  http://localhost:8081/api/v1/items/658bfad7f2ed6a63ee3e81c2
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkRST1JJQGdtYWlsLmNvbSIsImlhdCI6MTcwMzY3MjExN30.P1p8vuIe0cK6LgBe3JJBNLcAsEAxrQcUSWKoQlSgyBg
 Content-Type: application/json
 
-###
-GET http://data.fixer.io/api/latest?access_key=69eb4eb0b7cdf5687d7f3464639f7935&base=USD
 
 
-69eb4eb0b7cdf5687d7f3464639f7935
+### POST create item:
+POST http://localhost:8081/api/v1/contact
+Content-Type: application/json
+
+{
+    "name": "eden",
+    "email": "eden@gmail.com",
+    "message": "hallo"
+    
+  }
+
+### GET create item:
+GET http://localhost:8081/api/v1/contact
