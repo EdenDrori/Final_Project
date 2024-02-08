@@ -14,6 +14,7 @@ export const items = [
     },
     phone: "050-0000000",
     title: "Bag",
+    category: "bags",
     brand: "Guccy",
     price: 390,
     description:
@@ -37,6 +38,7 @@ export const items = [
     },
     phone: "050-0000000",
     title: "Dress",
+    category: "clothing",
     brand: "Prada",
     price: 450,
     description:
@@ -60,6 +62,7 @@ export const items = [
     },
     phone: "050-0000000",
     title: "Belt",
+    category: "accessories",
     brand: "Saint Laurent",
     price: 175,
     description:

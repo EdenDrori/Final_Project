@@ -95,7 +95,7 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQ
 
 ### POST create item:
 POST http://localhost:8081/api/v1/items
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkRST1JJRUVFMUBnbWFpbC5jb20iLCJfaWQiOiI2NWE2NTU1ZjhhNWY3ZDFiYmY3MzcyNGUiLCJpc0J1c2luZXNzIjp0cnVlLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzA1Mzk5ODQxfQ.EzMJ0tEdf7sXdYTbdWHb8otYg41-Uivd3kwqThLDnRg
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsIl9pZCI6IjY1OGIzNjAwZDU2MzAxNjlhYWZhZTFiZSIsImlzQnVzaW5lc3MiOnRydWUsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNjUyOTkzNn0.X4fGNESHYQ8lSOTYoMZ4uqDTwJOlEtlUrJgEfvSPFxY
 Content-Type: application/json
 
 {
@@ -110,6 +110,7 @@ Content-Type: application/json
    
     "phone": "050-4186390",
     "title": "Bag222",
+    "category": "accessories",
     "brand": "Gucci",
     "price":350,
     "description":
@@ -182,3 +183,8 @@ Content-Type: application/json
 
 ### GET create item:
 GET http://localhost:8081/api/v1/contact
+Authorization: bearer
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsIl9pZCI6IjY1OGIzNjAwZDU2MzAxNjlhYWZhZTFiZSIsImlzQnVzaW5lc3MiOnRydWUsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNjUyOTkzNn0.X4fGNESHYQ8lSOTYoMZ4uqDTwJOlEtlUrJgEfvSPFxY
+
+###
+GET https://maps.googleapis.com/maps/api/geocode/json?address=$1600AmphitheatreParkway,MountainView,CA&key=$AIzaSyB14AY-b2zU0WJ43-7TeqYsmsdD7VbmVu0

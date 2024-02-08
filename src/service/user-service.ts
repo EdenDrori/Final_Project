@@ -6,6 +6,9 @@ import { auth } from "./auth-service";
 const createUser = async (userData: IUser) => {
   const user = new User(userData);
   user.password = await auth.hashPassword(user.password);
+  user.image.url =
+    user.image?.url || "https://cdn-icons-png.flaticon.com/256/147/147142.png";
+  user.image.alt = user.image?.alt || 'default alt';
   return user.save();
 };
 
